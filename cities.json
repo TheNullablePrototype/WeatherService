@@ -1,0 +1,20 @@
+[
+  {
+    "name": "Saint-Petersburg",
+    "country": "Russia",
+    "lat": 59.939099,
+    "lon": 30.315877
+  },
+  {
+    "name": "Moscow",
+    "country": "Russia",
+    "lat": 55.755819,
+    "lon": 37.617644
+  },
+  {
+    "name": "Minsk",
+    "country": "Belarus",
+    "lat": 53.902284,
+    "lon": 27.561831
+  }
+]
