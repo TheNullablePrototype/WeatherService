@@ -1,18 +1,17 @@
 package com.prototype.weatherservice.utils.web;
 
+import lombok.extern.slf4j.Slf4j;
 import org.apache.hc.client5.http.async.methods.SimpleHttpRequest;
 import org.apache.hc.client5.http.async.methods.SimpleHttpResponse;
 import org.apache.hc.core5.concurrent.FutureCallback;
 import org.apache.hc.core5.http.message.StatusLine;
-import org.slf4j.Logger;
 
+@Slf4j
 public class SimpleFutureCallback implements FutureCallback<SimpleHttpResponse> {
 
-    private final Logger logger;
     private final SimpleHttpRequest request;
 
-    public SimpleFutureCallback(Logger logger, SimpleHttpRequest request) {
-        this.logger = logger;
+    public SimpleFutureCallback(SimpleHttpRequest request) {
         this.request = request;
     }
 

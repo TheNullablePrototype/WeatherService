@@ -8,8 +8,7 @@ import com.prototype.weatherservice.service.location.City;
 import com.prototype.weatherservice.service.location.Country;
 import com.prototype.weatherservice.service.location.LocationService;
 import com.prototype.weatherservice.service.weather.WeatherService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -23,9 +22,8 @@ import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 @Service
+@Slf4j
 public class WeatherServiceImpl implements WeatherService {
-
-    private final Logger logger = LoggerFactory.getLogger(WeatherService.class);
 
     private final List<WeatherProvider> providers;
     private final LocationService locationService;

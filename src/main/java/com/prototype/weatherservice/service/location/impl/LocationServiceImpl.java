@@ -8,8 +8,7 @@ import com.prototype.weatherservice.service.location.LocationService;
 import com.prototype.weatherservice.utils.gson.GsonAdapters;
 import lombok.Getter;
 import lombok.SneakyThrows;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
@@ -23,9 +22,8 @@ import java.util.Map;
 import java.util.Optional;
 
 @Service
+@Slf4j
 public class LocationServiceImpl implements LocationService {
-
-    private final Logger logger = LoggerFactory.getLogger(LocationService.class);
 
     private final GsonHelper gsonHelper;
 
