@@ -11,6 +11,8 @@ Features:
 - Periodic collection and averaging of temperature data in cities using three free weather services;
 - REST Endpoint API.
 
+The interval for polling weather services, as well as the possibility of disabling it, can be found in application.properties
+
 API:
 
 ```
