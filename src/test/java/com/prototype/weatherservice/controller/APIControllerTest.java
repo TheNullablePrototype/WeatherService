@@ -7,7 +7,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -27,12 +26,7 @@ class APIControllerTest {
     @Test
     void getWeatherDataByCity() throws Exception {
 
-        String expectedContent = "{\n" +
-                "  \"name\": \"Moscow\",\n" +
-                "  \"country\": \"Russia\",\n" +
-                "  \"temp\": 26,\n" +
-                "  \"timestamp\": 1659520800000\n" +
-                "}";
+        String expectedContent = "{\"country\":\"Russia\",\"timestamp\":1659520800000,\"name\":\"Moscow\",\"temp\":26}";
 
         this.mockMvc.perform(get("/api/weather/v1/").param("city", "Moscow"))
                 .andDo(print())
@@ -44,12 +38,7 @@ class APIControllerTest {
     @Test
     void getWeatherDataByCityAndCountry() throws Exception {
 
-        String expectedContent = "{\n" +
-                "  \"name\": \"Moscow\",\n" +
-                "  \"country\": \"Russia\",\n" +
-                "  \"temp\": 26,\n" +
-                "  \"timestamp\": 1659520800000\n" +
-                "}";
+        String expectedContent = "{\"country\":\"Russia\",\"timestamp\":1659520800000,\"name\":\"Moscow\",\"temp\":26}";
 
         this.mockMvc.perform(get("/api/weather/v1/")
                         .param("city", "Moscow")
@@ -80,20 +69,7 @@ class APIControllerTest {
     @Test
     void getWeatherDataByCityAndDate()throws Exception  {
 
-        String expectedContent = "[\n" +
-                "  {\n" +
-                "    \"name\": \"Moscow\",\n" +
-                "    \"country\": \"Russia\",\n" +
-                "    \"temp\": 27,\n" +
-                "    \"timestamp\": 1659517200000\n" +
-                "  },\n" +
-                "  {\n" +
-                "    \"name\": \"Moscow\",\n" +
-                "    \"country\": \"Russia\",\n" +
-                "    \"temp\": 26,\n" +
-                "    \"timestamp\": 1659520800000\n" +
-                "  }\n" +
-                "]";
+        String expectedContent = "[{\"country\":\"Russia\",\"timestamp\":1659517200000,\"name\":\"Moscow\",\"temp\":27},{\"country\":\"Russia\",\"timestamp\":1659520800000,\"name\":\"Moscow\",\"temp\":26}]";
 
         this.mockMvc.perform(get("/api/weather/v1/")
                         .param("city", "Moscow")
@@ -107,20 +83,7 @@ class APIControllerTest {
     @Test
     void getWeatherDataByCityAndCountryAndDate() throws Exception {
 
-        String expectedContent = "[\n" +
-                "  {\n" +
-                "    \"name\": \"Moscow\",\n" +
-                "    \"country\": \"Russia\",\n" +
-                "    \"temp\": 27,\n" +
-                "    \"timestamp\": 1659517200000\n" +
-                "  },\n" +
-                "  {\n" +
-                "    \"name\": \"Moscow\",\n" +
-                "    \"country\": \"Russia\",\n" +
-                "    \"temp\": 26,\n" +
-                "    \"timestamp\": 1659520800000\n" +
-                "  }\n" +
-                "]";
+        String expectedContent = "[{\"country\":\"Russia\",\"timestamp\":1659517200000,\"name\":\"Moscow\",\"temp\":27},{\"country\":\"Russia\",\"timestamp\":1659520800000,\"name\":\"Moscow\",\"temp\":26}]";
 
         this.mockMvc.perform(get("/api/weather/v1/")
                         .param("city", "Moscow")
