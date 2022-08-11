@@ -1,13 +1,13 @@
 package com.prototype.weatherservice.service.location.impl;
 
-import com.prototype.weatherservice.helper.GsonHelper;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.ObjectReader;
 import com.prototype.weatherservice.service.location.City;
 import com.prototype.weatherservice.service.location.ConfigLocation;
 import com.prototype.weatherservice.service.location.Country;
 import com.prototype.weatherservice.service.location.LocationService;
-import com.prototype.weatherservice.utils.gson.GsonAdapters;
-import lombok.Getter;
 import lombok.SneakyThrows;
+import lombok.Value;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -23,15 +23,15 @@ import java.util.Optional;
 
 @Service
 @Slf4j
+@Value
 public class LocationServiceImpl implements LocationService {
 
-    private final GsonHelper gsonHelper;
+    Map<String, Country> countries = new HashMap<>();
 
-    @Getter
-    private final Map<String, Country> countries = new HashMap<>();
+    ObjectMapper mapper;
 
-    public LocationServiceImpl(GsonHelper gsonHelper) {
-        this.gsonHelper = gsonHelper;
+    public LocationServiceImpl(ObjectMapper mapper) {
+        this.mapper = mapper;
     }
 
     @Override
@@ -63,10 +63,12 @@ public class LocationServiceImpl implements LocationService {
         if (Files.exists(path)) {
 
             final String json = new String(Files.readAllBytes(path), StandardCharsets.UTF_8);
-            final List<ConfigLocation> locations = gsonHelper.getGson().fromJson(json, GsonAdapters.TYPE_LIST_CONFIG_LOCATION);
-
+            ObjectReader reader = mapper.readerForListOf(ConfigLocationImpl.class);
+            List<ConfigLocation> locations = reader.readValue(json);
             if (locations.isEmpty())
                 throw new IllegalArgumentException("Locations is empty");
+            else
+                logger.info("Loaded {} locations", locations.size());
 
             locations.forEach(this::register);
         }

@@ -1,11 +1,9 @@
 package com.prototype.weatherservice.controller;
 
-import com.prototype.weatherservice.helper.GsonHelper;
 import com.prototype.weatherservice.model.WeatherData;
 import com.prototype.weatherservice.service.location.City;
 import com.prototype.weatherservice.service.location.LocationService;
 import com.prototype.weatherservice.service.weather.WeatherService;
-import com.prototype.weatherservice.utils.gson.GsonAdapters;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.MediaType;
@@ -24,15 +22,12 @@ public class APIController {
 
     private final WeatherService weatherService;
     private final LocationService locationService;
-    private final GsonHelper gsonHelper;
 
     @Autowired
     public APIController(WeatherService weatherService,
-                         LocationService locationService,
-                         GsonHelper gsonHelper) {
+                         LocationService locationService) {
         this.weatherService = weatherService;
         this.locationService = locationService;
-        this.gsonHelper = gsonHelper;
     }
 
     @RequestMapping("/run")
@@ -64,14 +59,14 @@ public class APIController {
                 if (list.isEmpty())
                     return ResponseEntity.notFound().build();
 
-                return ResponseEntity.ok(gsonHelper.getGson().toJson(list, GsonAdapters.TYPE_LIST_CONFIG_LOCATION));
+                return ResponseEntity.ok(list);
             } else {
                 WeatherData data = weatherService.getWeatherDataByCity(city.get());
 
                 if (data == null)
                     return ResponseEntity.notFound().build();
 
-                return ResponseEntity.ok(gsonHelper.getGson().toJson(data));
+                return ResponseEntity.ok(data);
             }
 
         }

@@ -1,11 +1,17 @@
 package com.prototype.weatherservice.provider.ninjas;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.prototype.weatherservice.provider.Weather;
+import lombok.Builder;
+import lombok.Value;
+import lombok.extern.jackson.Jacksonized;
 
-public class NinjasWeather extends Weather {
+@Jacksonized
+@Builder
+@Value
+public class NinjasWeather implements Weather {
 
-    public NinjasWeather(int temperature) {
-        super(temperature);
-    }
+    @JsonProperty("temp")
+    int temperature;
 
 }

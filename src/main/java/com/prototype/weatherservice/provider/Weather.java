@@ -1,14 +1,7 @@
 package com.prototype.weatherservice.provider;
 
-import lombok.Getter;
+public interface Weather {
 
-@Getter
-public abstract class Weather {
-
-    private final int temperature;
-
-    protected Weather(int temperature) {
-        this.temperature = temperature;
-    }
+    int getTemperature();
 
 }

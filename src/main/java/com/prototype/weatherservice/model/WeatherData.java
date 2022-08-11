@@ -1,36 +1,41 @@
 package com.prototype.weatherservice.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.prototype.weatherservice.utils.CustomTimestampSerializer;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
 
-
 @Entity
 @Getter
 @NoArgsConstructor
-@ToString
 public class WeatherData {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column
-    private long id;
+    @JsonIgnore
+    private Long id;
 
     @Column
     private String country;
 
+    @JsonProperty("name")
     @Column
     private String city;
 
+    @JsonProperty("temp")
     @Column
     private int temperature;
 
     @Column
     @CreationTimestamp
+    @JsonSerialize(using = CustomTimestampSerializer.class)
     private Timestamp timestamp;
 
     public WeatherData(String country, String city, int temperature) {
@@ -42,25 +47,19 @@ public class WeatherData {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
 
-        WeatherData that = (WeatherData) o;
+        if (!(o instanceof WeatherData))
+            return false;
 
-        if (id != that.id) return false;
-        if (temperature != that.temperature) return false;
-        if (!city.equals(that.city)) return false;
-        if (!country.equals(that.country)) return false;
-        return timestamp.equals(that.timestamp);
+        WeatherData other = (WeatherData) o;
+
+        return id != null &&
+                id.equals(other.getId());
     }
 
     @Override
     public int hashCode() {
-        int result = (int) (id ^ (id >>> 32));
-        result = 31 * result + city.hashCode();
-        result = 31 * result + country.hashCode();
-        result = 31 * result + temperature;
-        result = 31 * result + timestamp.hashCode();
-        return result;
+        return getClass().hashCode();
     }
 
 }

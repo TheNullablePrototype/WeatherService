@@ -1,14 +1,19 @@
 package com.prototype.weatherservice.service.location.impl;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.prototype.weatherservice.service.location.ConfigLocation;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Builder;
+import lombok.Value;
+import lombok.extern.jackson.Jacksonized;
 
-@AllArgsConstructor
-@Getter
+@Jacksonized
+@Builder
+@Value
 public class ConfigLocationImpl implements ConfigLocation {
 
-    private final float lat, lon;
-    private final String city, country;
+    float lat, lon;
+    @JsonProperty("name")
+    String city;
+    String country;
 
 }
