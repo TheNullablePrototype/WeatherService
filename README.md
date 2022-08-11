@@ -22,6 +22,6 @@ If your IDEA didn't generate it on its own when importing the project create Spr
 EDIT DATABASE SETTINGS:
 
 You can change the data to connect to the database:
-for runtime in application.properties
-for test in application-test.properties
+1. Runtime in application.properties
+2. Test in application-test.properties
    
