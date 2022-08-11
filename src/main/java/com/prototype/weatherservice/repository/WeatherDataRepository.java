@@ -13,16 +13,6 @@ public interface WeatherDataRepository extends JpaRepository<WeatherData, Long> 
 
     WeatherData findFirstByCountryAndCityOrderByTimestampDesc(@NonNull String country, @NonNull String city);
 
-    WeatherData findFirstByCityAndTimestamp(@NonNull String city, Timestamp timestamp);
-
     List<WeatherData> findAllByCountryAndCityAndTimestampBetween(String country, String city, Timestamp timestampStart, Timestamp timestampEnd);
-
-    //WeatherData findByCityAndTimestampBefore(String city, Timestamp timestamp);
-
-
-
-
-
-    //WeatherData getWeatherDataByCity(String cityName, Timestamp timestamp);
 
 }
