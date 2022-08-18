@@ -35,18 +35,6 @@ public class NinjasWeatherProvider implements WeatherProvider {
                 .bodyToFlux(NinjasWeather.class)
                 .blockFirst()
                 .getTemperature();
-
-//        SimpleHttpRequest request = SimpleRequestBuilder
-//                .get(this.url)
-//                .addHeader("X-RapidAPI-Key", token)
-//                .addHeader("X-RapidAPI-Host", host)
-//                .addParameter("lat", String.valueOf(city.getLat()))
-//                .addParameter("lon", String.valueOf(city.getLon()))
-//                .build();
-//
-//        SimpleHttpResponse response = service.createFutureResponse(request).get();
-//        Weather weather = this.gsonHelper.getGson().fromJson(response.getBodyText(), NinjasWeather.class);
-//        return weather.getTemperature();
     }
 
 }

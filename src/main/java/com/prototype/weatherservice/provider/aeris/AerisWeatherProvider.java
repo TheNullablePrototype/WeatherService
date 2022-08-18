@@ -29,22 +29,10 @@ public class AerisWeatherProvider implements WeatherProvider {
                     headers.add("X-RapidAPI-Host", host);
                 })
                 .retrieve()
-//                .onStatus(
-//                        httpStatus -> true,
-//                        response -> response.bodyToMono(String.class).map(Exception::new))
                 .bodyToFlux(AerisWeather.class)
                 .blockFirst()
                 .getTemperature();
 
-//        SimpleHttpRequest request = SimpleRequestBuilder
-//                .get()
-//                .addParameter("lat", String.valueOf(city.getLat()))
-//                .addParameter("lon", String.valueOf(city.getLon()))
-//                .build();
-//
-//        SimpleHttpResponse response = service.createFutureResponse(request).get();
-//        Weather weather = this.gsonHelper.getGson().fromJson(response.getBodyText(), AerisWeather.class);
-//        return weather.getTemperature();
     }
 
 }
